@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,13 +27,22 @@ public class MainActivity extends AppCompatActivity {
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // get the listview
+        expListView = (ExpandableListView) findViewById(R.id.lvExp);
+        refreshList();
+    }
+
     protected void refreshList(){
         Response.Listener<String> responseListener = new Response.Listener<String>(){
             @Override
             public void onResponse(String response){
                 try{
                     JSONArray jsonResponse = new JSONArray((response));
-                    if(jsonResponse!= null) {
                         for (int i = 0; i < jsonResponse.length(); i++) {
                             JSONObject food = jsonResponse.getJSONObject(i);
                             JSONObject seller = food.getJSONObject("seller");
@@ -80,25 +92,17 @@ public class MainActivity extends AppCompatActivity {
                                 childMapping.put(sel, temp);
                             }
                         }
-                    }
+                    listAdapter = new MainListAdapter(MainActivity.this, listSeller, childMapping);
+                    // setting list adapter
+                    expListView.setAdapter(listAdapter);
                 } catch (JSONException ex) {
                         ex.printStackTrace();
                 }
             }
         };
+        MenuRequest menuRequest = new MenuRequest(responseListener);
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        queue.add(menuRequest);
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.lvExp);
-        listAdapter = new MainListAdapter(MainActivity.this, listSeller, childMapping);
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
-        refreshList();
-    }
 }
