@@ -223,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("customerName", customerName);
                         intent.putExtra("currentInvoiceId", currentInvoiceId);
                         startActivity(intent);
-                        finish();
                     }
                 } catch(JSONException e){
                     Toast.makeText(MainActivity.this,"Invoice is Empty", Toast.LENGTH_LONG).show();

@@ -10,7 +10,7 @@ package com.example.jfood_android;
  */
 public class NetworkAdapter {
     private static NetworkAdapter instance;
-    private static String ipAddress = "http://192.168.0.8:8090";
+    private static String ipAddress = "http://192.168.0.8:8080";
 
     private NetworkAdapter(){}
 
