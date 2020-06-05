@@ -1,5 +1,13 @@
 package com.example.jfood_android;
 
+/**
+ * <h1> Class untuk Seller JFood </h1>
+ * Seller merupakan penjual makanan dalam sistem JFood
+ * Program ini ditujukan untuk membuat objek Seller
+ *
+ * @author Geraldy Christanto
+ * @since 16 April 2020
+ */
 public class Seller {
     private int id;
     private String name;
@@ -67,7 +75,6 @@ public class Seller {
 
     /**
      * Method untuk mendapatkan id penjual makanan
-     * @return id Mengembalikan nilai id pada objek Seller
      */
     public void setId(int id){
         this.id = id;

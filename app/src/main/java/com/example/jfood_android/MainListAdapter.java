@@ -2,9 +2,7 @@ package com.example.jfood_android;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -12,8 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-import android.widget.BaseExpandableListAdapter;
 
+/**
+ * <h1>Class MainListAdapter</h1>
+ * <p>Method untuk membuat list adapter pada MainActivity</p>
+ *
+ * @author Geraldy Christanto
+ * @version 1.0
+ * @since 6 Juni 2020
+ */
 public class MainListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
@@ -48,7 +53,7 @@ public class MainListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.layout_food, null);
         }
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListHeader);
-        String s = "[" + childText.getId() + "] " + childText.getName() + ", Price : " + childText.getPrice();
+        String s = childText.getName() + ", Price : " + childText.getPrice();
         txtListChild.setText(s);
         return convertView;
     }
@@ -100,5 +105,4 @@ public class MainListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
-
 }

@@ -7,15 +7,33 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <h1>Request untuk Membuat Menu</h1>
+ * <p>Proses request yang dipanggil dari activity</p>
+ *
+ * @author Geraldy Christanto
+ * @version 1.0
+ * @since 6 Juni 2020
+ */
 public class MenuRequest extends StringRequest {
-    private static final String URL = "http://192.168.100.78:8080/food";
+    private static final String URL = NetworkAdapter.getIpAddress() + "/food";
     private Map<String,String> params;
 
+    /**
+     * MenuRequuest yang diminta pada MainActivity
+     * @param listener Response yang dilakukan dari objek yang terdapat pada View
+     */
     public MenuRequest(Response.Listener<String> listener) {
         super(Method.GET, URL, listener, null);
         params = new HashMap<>();
     }
 
+    /**
+     * Mengembalikan parameter Map dari POST yang digunakan untuk request invoice
+     *
+     * @return Parameter request dalam aplikasi
+     * @throws AuthFailureError jika terjadi kesalahan autentikasi
+     */
     @Override
     protected Map<String,String> getParams() throws AuthFailureError{
         return params;

@@ -1,11 +1,18 @@
 package com.example.jfood_android;
 
-public class Food {
+/**
+ * <h1>Class Food</h1>
+ * <p>Class untuk membuat objek food dan memodifikasi objek food</p>
+ * @author Geraldy Christanto
+ * @since 16 April 2020
+ */
+public class Food{
+
     private int id;
     private String name;
     private int price;
-    private String category;
     private Seller seller;
+    private String category;
 
     /**
      * Constructor untuk objek dari class Food
@@ -24,7 +31,7 @@ public class Food {
     }
 
     /**
-     * Method ini bertujuan untuk mendapatkan id dari class Food
+     * Method ini bertujuan untuk mendapatkan id dari objek Food
      * @return id untuk mengembalikan nilai instance variable id
      */
     public int getId(){
@@ -32,7 +39,7 @@ public class Food {
     }
 
     /**
-     * Method ini bertujuan untuk mendapatkan nilai seller dari class Seller
+     * Method ini bertujuan untuk mendapatkan nilai seller dari objek Seller
      * dengan memanggil instance dari object yang dibuat
      * @return seller untuk mengembalikan nilai instance variable seller dari class Seller
      */
@@ -65,39 +72,55 @@ public class Food {
     }
 
     /**
-     * Method ini b
+     * Method ini bertujuan untuk mengatur nilai dari id objek Food
      * @param id Parameter nilai Id food yang akan di atur
      */
     public void setId(int id){
         this.id = id;
     }
 
+    /**
+     * Method ini bertujuan untuk mengatur nama dari objek food pada constructor
+     * @param name Nama food yang akan diatur pada objek food
+     */
     public void setName(String name){
         this.name = name;
     }
 
+    /**
+     * Method ini bertujuan untuk mengatur objek seller dari objek food pada constructor
+     */
     public void setSeller(){
         this.seller = seller;
     }
 
+    /**
+     * Method ini bertujuan untuk mengatur variable price dari objek food pada constructor
+     * @param price Harga makanan yang akan diatur pada objek food
+     */
     public void setPrice(int price){
         this.price = price;
     }
 
+    /**
+     * Method ini bertujuan untuk mengatur enum Category dari objek food pada constructor
+     * @param category Kategori yang akan diatur pada saat membuat objek food
+     */
     public void setCategory(String category){
         this.category = category;
     }
 
     /**
-     * Method untuk mencetak variabel nama dari objek Food
+     * Method untuk menampilkan informasi objek Food pada terminal
+     *@return informasi objek food
      */
+    @Override
     public String toString(){
         return "\nId = " + id +
                 "\nName = " + name +
-                "\nSeller = " + getSeller().getName().toString() +
-                "\nCity =" + getSeller().getLocation().getCity().toString() +
+                "\nSeller = " + getSeller().getName() +
+                "\nCity =" + getSeller().getLocation().getCity() +
                 "\nPrice = " + price +
-                "\nCategory = " + getCategory().toString();
+                "\nCategory = " + getCategory();
     }
-
 }

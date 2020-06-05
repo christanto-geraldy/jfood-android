@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context=".MainActivity">
+
+
+<item
+    android:id="@+id/history"
+    android:icon="@drawable/history_18dp"
+    android:title="@string/history"
+    app:showAsAction="ifRoom" />
+
+    <item
+            android:id="@+id/pesanan"
+            android:title="@string/pesanan"
+            android:contentDescription="@string/pesanan"
+            app:showAsAction="never" />
+
+
+        <item
+            android:id="@+id/signOut"
+            android:title="@string/signOut"
+            android:contentDescription="@string/signOut"
+            app:showAsAction="never" />
+
+</menu>

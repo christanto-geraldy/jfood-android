@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -17,11 +18,18 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends AppCompatActivity {
+/**
+ * <h1>Activity untuk login customer</h1>
+ * <p>Proses activity ketika sedang dijalankan</p>
+ *
+ * @author Geraldy Christanto
+ * @version 1.0
+ * @since 6 Juni 2020
+ */
+public class LoginActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -30,35 +38,64 @@ public class LoginActivity extends AppCompatActivity {
         final Button btnLogin = findViewById(R.id.btnLogin);
         final TextView tvRegister = findViewById(R.id.tvRegister);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onClick(View view) {
-                final String email = etEmail.getText().toString();
-                final String password = etPassword.getText().toString();
-
-                Response.Listener<String> responseListener = new Response.Listener<String>(){
+            public void run() {
+                btnLogin.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject jsonObject = new JSONObject(response);
-                            if(jsonObject != null){
-                                Toast.makeText(LoginActivity.this, "Successfully Logged in", Toast.LENGTH_SHORT).show();
-                                Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(mainIntent);
-                            } else{
-                                Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch(JSONException e){
-                            Toast.makeText(LoginActivity.this,"Login Failed", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                };
+                    public void onClick(View view) {
+                        String email = etEmail.getText().toString();
+                        String password = etPassword.getText().toString();
 
-                LoginRequest loginRequest = new LoginRequest(email,password,responseListener);
-                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-                queue.add(loginRequest);
+                        if(email.isEmpty()){
+                            etEmail.setError("Please enter your email address");
+                            etEmail.requestFocus();
+                            return;
+                        }
+
+                        if(password.isEmpty()){
+                            etPassword.setError("Please enter your password");
+                            etPassword.requestFocus();
+                            return;
+                        }
+
+                        Response.Listener<String> responseListener = new Response.Listener<String>(){
+                            @Override
+                            public void onResponse(String response) {
+                                try{
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    if(jsonObject != null){
+                                        if(jsonObject.getString("name") == "null"){
+                                            throw new JSONException("name");
+                                        }
+                                        else {
+                                            Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                            mainIntent.putExtra("customerId", jsonObject.getInt("id"));
+                                            mainIntent.putExtra("customerName", jsonObject.getString("name"));
+                                            mainIntent.addFlags(mainIntent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            Toast.makeText(LoginActivity.this, "Successfully Logged in", Toast.LENGTH_SHORT).show();
+                                            startActivity(mainIntent);
+                                            finish();
+                                        }
+                                    } else{
+                                        Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch(JSONException e){
+                                    Toast.makeText(LoginActivity.this,"Login Failed", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        };
+
+                        LoginRequest loginRequest = new LoginRequest(email,password,responseListener);
+                        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                        queue.add(loginRequest);
+                    }
+
+                });
+
             }
         });
+
 
         tvRegister.setOnClickListener(new View.OnClickListener(){
             @Override

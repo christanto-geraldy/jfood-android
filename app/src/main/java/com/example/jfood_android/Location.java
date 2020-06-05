@@ -1,10 +1,25 @@
 package com.example.jfood_android;
 
+/**
+ * <h1> Class untuk Location </h1>
+ * Location merupakan lokasi dari penjual makanan pada sistem JFood
+ * Program ini ditujukan untuk membuat objek Location
+ *
+ * @author Geraldy Christanto
+ * @since 4 Juni 2020
+ */
 public class Location {
     private String province;
     private String description;
     private String city;
 
+    /**
+     * Constructor untuk objek dari class Location
+     * Constructor untuk mendapatkan argumen dari setiap parameter dan merujuk kepada setiap variabel di bawah
+     * @param city Parameter pertama untuk mendapatkan kota lokasi
+     * @param province Parameter kedua untuk mendapatkan provinsi dari lokasi
+     * @param description Parameter ketiga untuk mendapatkan deskripsi lokasi
+     */
     public Location(String city, String province, String description){
         this.city = city;
         this.province = province;
