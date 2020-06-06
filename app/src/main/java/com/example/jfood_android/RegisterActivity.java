@@ -129,7 +129,6 @@ public class RegisterActivity extends AppCompatActivity{
                     for (int i = 0; i < jsonResponse.length(); i++) {
                         JSONObject customer = jsonResponse.getJSONObject(i);
                         String emailCheck = customer.getString("email");
-                        Toast.makeText(RegisterActivity.this,emailCheck,Toast.LENGTH_LONG).show();
                         customers = new ArrayList<String>();
                         customers.add(emailCheck);
                     }
